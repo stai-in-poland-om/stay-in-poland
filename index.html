@@ -1,0 +1,450 @@
+
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay in Poland - Oleksandr Matviienko 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&family=Noto+Sans+Georgian:wght@400;700&display=swap');
+        
+        :root {
+            --brand-blue: #0f172a;
+            --brand-gold: #d4af37;
+        }
+
+        body { 
+            font-family: 'Open Sans', sans-serif; 
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        h1, h2, h3, .font-brand { 
+            font-family: 'Montserrat', 'Noto Sans Georgian', sans-serif; 
+        }
+
+        .flag-collage {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            filter: grayscale(10%) blur(1px);
+        }
+
+        .flag-item { background-size: cover; background-position: center; }
+
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e2e8f0;
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brand-gold);
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .lang-active {
+            background-color: var(--brand-gold) !important;
+            color: white !important;
+            border-color: var(--brand-gold) !important;
+        }
+
+        .whatsapp-btn {
+            background-color: #25D366;
+            animation: shadow-pulse 2s infinite;
+        }
+
+        @keyframes shadow-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-slate-900 rounded-lg flex items-center justify-center text-white font-bold">SP</div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-bold text-slate-900 leading-tight uppercase">Stay In Poland</span>
+                    <span class="text-[10px] tracking-widest text-slate-500 uppercase font-bold">Oleksandr Matviienko</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-full" id="lang-switcher">
+                <button onclick="changeLanguage('pl')" id="btn-pl" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all border border-transparent">PL</button>
+                <button onclick="changeLanguage('ua')" id="btn-ua" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all border border-transparent">UA</button>
+                <button onclick="changeLanguage('ru')" id="btn-ru" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all border border-transparent">RU</button>
+                <button onclick="changeLanguage('ge')" id="btn-ge" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all border border-transparent">GE</button>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span class="hidden md:block text-xs font-bold text-green-600 uppercase" id="nav-free-cons">Bezpłatna Konsultacja</span>
+                <a href="tel:+48455564257" class="bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-slate-800 transition">
+                    +48 455 564 257
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-[60vh] flex items-center justify-center text-center overflow-hidden bg-slate-900 px-6">
+        <div class="flag-collage">
+            <div class="flag-item" style="background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1570119853927-4632831f290d?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="flag-item" style="background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1645714041300-84841e793976?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="flag-item" style="background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1563811771046-ba984ff30900?auto=format&fit=crop&q=80&w=800');"></div>
+            <div class="flag-item" style="background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1541613569553-332a2574a508?auto=format&fit=crop&q=80&w=800');"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="inline-block bg-yellow-500/10 border border-yellow-500/50 text-yellow-500 px-6 py-2 rounded-full text-xs font-bold mb-8 tracking-widest uppercase backdrop-blur-md" id="hero-office">
+                🏛️ Biuro w Łęczycy | ul. Przedrynek 8
+            </div>
+            <h1 class="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight" id="hero-title">
+                Legalizacja Pobytu <br><span class="text-yellow-500">Pewnie i Skutecznie</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto" id="hero-subtitle">
+                Eksperckie wsparcie Oleksandra Matviienko w sprawach urzędowych dla obcokrajowców.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#kontakt" class="bg-yellow-500 text-slate-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition shadow-xl" id="btn-hero-contact">Bezpłatna Konsultacja</a>
+                <a href="#promocja" class="bg-white/10 backdrop-blur-lg border border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition" id="btn-hero-promo">Cennik Lato 2026!</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-20">
+
+        <section id="uslugi" class="mb-32">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl font-bold text-slate-900 mb-4" id="section-services-title">Zakres Pomocy</h2>
+                <div class="w-20 h-1.5 bg-yellow-500 mx-auto rounded-full"></div>
+                <p class="mt-6 text-slate-500 text-lg max-w-2xl mx-auto" id="section-services-desc">Zajmujemy się wszelkimi formalnościami, abyś Ty mógł skupić się na swojej przyszłości.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="services-container">
+                <!-- Services Populated via JS -->
+            </div>
+        </section>
+
+        <section id="promocja" class="bg-white rounded-[3rem] p-8 md:p-16 mb-32 border border-slate-100 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-50 rounded-full blur-3xl -mr-32 -mt-32 opacity-50"></div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-16 relative z-10">
+                <div class="lg:w-1/2">
+                    <span class="text-yellow-600 font-bold text-sm uppercase tracking-widest block mb-4" id="promo-badge">Oferta Lato 2026!</span>
+                    <h2 class="text-5xl font-bold text-slate-900 mb-8 leading-tight" id="promo-title">Najniższe Stawki <br>Gwarantowane</h2>
+                    <p class="text-xl text-slate-600 mb-10" id="promo-desc">Przygotuj się na Lato 2026 z naszymi promocyjnymi cenami na kluczowe usługi.</p>
+                    
+                    <div class="space-y-4 mb-12" id="price-list">
+                        <!-- Prices Populated -->
+                    </div>
+                    
+                    <p class="text-sm text-slate-400 italic" id="promo-disclaimer">* Pozostałe usługi wyceniane indywidualnie po bezpłatnej analizie.</p>
+                </div>
+                <div class="lg:w-1/2 w-full">
+                    <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200">
+                        <h3 class="text-center text-xs font-bold text-slate-400 uppercase mb-8 tracking-[0.2em]" id="chart-heading">Wizualizacja Oszczędności (PLN)</h3>
+                        <div class="h-[400px]">
+                            <canvas id="savingsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontakt">
+            <div class="bg-slate-900 rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
+                <div class="lg:w-1/2 p-8 md:p-16 text-white flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-slate-800">
+                    <h2 class="text-4xl font-bold mb-10" id="contact-title">Twoje Biuro w Łęczycy</h2>
+                    <div class="space-y-10">
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center text-2xl">🏛️</div>
+                            <div>
+                                <p class="text-yellow-500 font-bold text-xs uppercase tracking-widest mb-1" id="label-loc">Adres</p>
+                                <p class="text-xl">ul. Przedrynek 8, 99-100 Łęczyca</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center text-2xl">📱</div>
+                            <div>
+                                <p class="text-yellow-500 font-bold text-xs uppercase tracking-widest mb-1" id="label-tel">Kontakt</p>
+                                <p class="text-2xl font-bold text-yellow-500">+48 455 564 257</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center text-2xl">📧</div>
+                            <div>
+                                <p class="text-yellow-500 font-bold text-xs uppercase tracking-widest mb-1">Email</p>
+                                <p class="text-xl">stay.in.poland.om@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 bg-white p-8 md:p-16 flex flex-col justify-center items-center text-center">
+                    <h3 class="text-3xl font-bold text-slate-900 mb-6" id="cons-title">Bezpłatna Konsultacja</h3>
+                    <p class="text-slate-500 mb-12 text-lg" id="cons-desc">Napisz do nas lub zadzwoń. Sprawdzimy Twoją sytuację dokumentową całkowicie za darmo.</p>
+                    
+                    <div class="w-full max-w-sm flex flex-col gap-6">
+                        <a href="https://wa.me/48455564257" class="whatsapp-btn flex items-center justify-center gap-4 text-white py-5 rounded-2xl font-bold hover:opacity-90 transition shadow-lg text-lg">
+                            WhatsApp
+                        </a>
+                        <a href="tel:+48455564257" class="flex items-center justify-center gap-4 bg-slate-900 text-white py-5 rounded-2xl font-bold hover:bg-slate-800 transition shadow-lg text-lg">
+                            <span id="label-btn-call">Zadzwoń do nas</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const translations = {
+            pl: {
+                navFree: "Bezpłatna Konsultacja", heroOff: "🏛️ Biuro w Łęczycy | ul. Przedrynek 8",
+                heroT: "Legalizacja Pobytu <br><span class='text-yellow-500'>Pewnie i Skutecznie</span>",
+                heroS: "Eksperckie wsparcie Oleksandra Matviienko w sprawach urzędowych dla obcokrajowców.",
+                btnHC: "Bezpłatna Konsultacja", btnHP: "Cennik Lato 2026!",
+                sTitle: "Zakres Pomocy", sDesc: "Zajmujemy się wszelkimi formalnościami, abyś Ty mógł skupić się na swojej przyszłości.",
+                pBadge: "Oferta Lato 2026!", pTitle: "Najniższe Stawki <br>Gwarantowane",
+                pDesc: "Przygotuj się na Lato 2026 z naszymi promocyjnymi cenami na kluczowe usługi.",
+                pDisc: "* Pozostałe usługi wyceniane indywidualnie po bezpłatnej analizie.",
+                cH: "Wizualizacja Oszczędności (PLN)",
+                conT: "Twoje Biuro w Łęczycy", labLoc: "Adres", labTel: "Kontakt",
+                consT: "Bezpłatna Konsultacja", consD: "Napisz do nas lub zadzwoń. Sprawdzimy Twoją sytuację dokumentową całkowicie za darmo.",
+                lBtnC: "Zadzwoń do nas", fOff: "Biuro Łęczyca", fLeg: "Obsługa Cudzoziemców",
+                labels: ["Karta Pobytu", "Karta CUKR", "Prawo Jazdy", "Profil Zaufany"],
+                datasets: ["Cena Standardowa", "Lato 2026 ☀️"],
+                services: [
+                    { t: "Pobyt Czasowy", d: "Pełne wsparcie we wnioskach o pobyt czasowy (praca, rodzina, studia, inne)." },
+                    { t: "Pobyt Rezydenta UE", d: "Pomoc w uzyskaniu statusu rezydenta długoterminowego UE dla osób mieszkających 5 lat w Polsce." },
+                    { t: "Karta CUKR", d: "Specjalna, uproszczona procedura dedykowana obywatelom Ukrainy.", showOnly: ['pl', 'ua'] },
+                    { t: "Profil Zaufany", d: "Zakładanie i aktywacja Profilu Zaufanego (ePUAP) do załatwiania spraw online." },
+                    { t: "Wymiana Prawa Jazdy", d: "Kompleksowa obsługa wymiany zagranicznego dokumentu na polski." },
+                    { t: "Rejestr PESEL", d: "Sprawdzanie statusu PESEL UKR, aktualizacja danych i rejestracja." },
+                    { t: "Niekaralność", d: "Uzyskiwanie zaświadczeń o niekaralności z Krajowego Rejestru Karnego (KRK)." },
+                    { t: "Sprawy w ZUS", d: "Wnioski o świadczenia socjalne, wyjaśnianie składek i reprezentacja." }
+                ],
+                priceItems: [
+                    { n: "Karta Pobytu", old: "1200 zł", new: "700 zł" },
+                    { n: "Karta CUKR", old: "500 zł", new: "350 zł" },
+                    { n: "Prawo Jazdy", old: "500 zł", new: "300 zł" },
+                    { n: "Profil Zaufany", old: "100 zł", new: "50 zł" }
+                ]
+            },
+            ua: {
+                navFree: "Безкоштовна консультація", heroOff: "🏛️ Офіс у Ленчиці | вул. Пшедринек 8",
+                heroT: "Легалізація Перебування <br><span class='text-yellow-500'>Впевнено та Ефективно</span>",
+                heroS: "Експертна підтримка Олександра Матвієнка в офіційних справах для іноземців.",
+                btnHC: "Безкоштовна консультація", btnHP: "Ціни Літо 2026!",
+                sTitle: "Наші Послуги", sDesc: "Ми беремо на себе всі формальності, щоб ви могли зосередитися на своєму майбутньому.",
+                pBadge: "Акція Літо 2026!", pTitle: "Найнижчі Ставки <br>Гарантовано",
+                pDesc: "Підготуйтеся до літа 2026 року з нашими акційними цінами на ключові послуги.",
+                pDisc: "* Інші послуги оцінюються індивідуально після безкоштовного аналізу.",
+                cH: "Візуалізація заощаджень (PLN)",
+                conT: "Ваш офіс у Ленчиці", labLoc: "Адреса", labTel: "Контакт",
+                consT: "Безкоштовна консультація", consD: "Напишіть нам або зателефонуйте. Ми безкоштовно перевіримо стан ваших документів.",
+                lBtnC: "Зателефонуйте нам", fOff: "Офіс Ленчиця", fLeg: "Обслуговування іноземців",
+                labels: ["Карта побиту", "Карта CUKR", "Посвідчення водія", "Profil Zaufany"],
+                datasets: ["Стандартна ціна", "Літо 2026 ☀️"],
+                services: [
+                    { t: "Тимчасовий побит", d: "Повна підтримка у заявах на тимчасове перебування (робота, сім'я, навчання)." },
+                    { t: "Резидент ЄС", d: "Допомога в отриманні статусу довгострокового резидента ЄС." },
+                    { t: "Карта CUKR", d: "Спеціальна спрощена процедура для громадян України.", showOnly: ['pl', 'ua'] },
+                    { t: "Profil Zaufany", d: "Створення та активація Profil Zaufany (ePUAP) для онлайн-справ." },
+                    { t: "Посвідчення водія", d: "Комплексна допомога в заміні іноземного документа на польський." },
+                    { t: "Реєстр PESEL", d: "Перевірка статусу PESEL UKR, оновлення даних та реєстрація." },
+                    { t: "Несудимість", d: "Отримання довідок про несудимість з реєстру KRK." },
+                    { t: "Справи в ZUS", d: "Заяви на соціальні виплати та представництво." }
+                ],
+                priceItems: [
+                    { n: "Карта побиту", old: "1200 зл", new: "700 зл" },
+                    { n: "Карта CUKR", old: "500 зл", new: "350 зл" },
+                    { n: "Посвідчення водія", old: "500 зл", new: "300 зл" },
+                    { n: "Profil Zaufany", old: "100 зл", new: "50 зл" }
+                ]
+            },
+            ru: {
+                navFree: "Бесплатная консультация", heroOff: "🏛️ Офис в Ленчице | ул. Пшедрынек 8",
+                heroT: "Легализация Пребывания <br><span class='text-yellow-500'>Уверенно и Эффективно</span>",
+                heroS: "Экспертная поддержка Александра Матвиенко в официальных делах для иностранцев.",
+                btnHC: "Бесплатная консультация", btnHP: "Цены Лето 2026!",
+                sTitle: "Наши Услуги", sDesc: "Мы берем на себя все формальности, чтобы вы могли сосредоточиться на своем будущем.",
+                pBadge: "Акция Лето 2026!", pTitle: "Самые Низкие Ставки <br>Гарантированы",
+                pDesc: "Подготовьтесь к лету 2026 года с нашими акционными ценами на ключевые услуги.",
+                pDisc: "* Остальные услуги оцениваются индивидуально после бесплатного анализа.",
+                cH: "Визуализация сбережений (PLN)",
+                conT: "Ваш офис в Ленчице", labLoc: "Адрес", labTel: "Контакт",
+                consT: "Бесплатная консультация", consD: "Напишите нам или позвоните. Мы бесплатно проверим состояние ваших документов.",
+                lBtnC: "Позвоните нам", fOff: "Офис Ленчица", fLeg: "Обслуживание иностранцев",
+                labels: ["Карта побыту", "Вод. удостоверение", "Profil Zaufany"],
+                datasets: ["Стандартная цена", "Лето 2026 ☀️"],
+                services: [
+                    { t: "Временный побыт", d: "Полная поддержка в заявлениях на временное пребывание." },
+                    { t: "Резидент ЕС", d: "Помощь в получении статуса долгосрочного резидента ЕС." },
+                    { t: "Profil Zaufany", d: "Создание и активация доверенного профиля (ePUAP) для онлайн-дел." },
+                    { t: "Вод. удостоверение", d: "Комплексная помощь в замене иностранного документа на польский." },
+                    { t: "Реестр PESEL", d: "Проверка статуса PESEL, обновление данных и регистрация." },
+                    { t: "Несудимость", d: "Быстрое получение справок о несудимости из реестра KRK." },
+                    { t: "Дела в ZUS", d: "Заявления на социальные выплаты и представительство." }
+                ],
+                priceItems: [
+                    { n: "Карта побыту", old: "1200 зл", new: "700 зл" },
+                    { n: "Вод. удостоверение", old: "500 зл", new: "300 зл" },
+                    { n: "Profil Zaufany", old: "100 зл", new: "50 зл" }
+                ]
+            },
+            ge: {
+                navFree: "უფასო კონსულტაცია", heroOff: "🏛️ ოფისი ლენჩიცაში | წინდრინეკის ქ. 8",
+                heroT: "ბინადრობის ლეგალიზაცია <br><span class='text-yellow-500'>უსაფრთხოდ და ეფექტურად</span>",
+                heroS: "ალექსანდრე მატვიენკოს ექსპერტული მხარდაჭერა ოფიციალურ საქმეებში უცხოელებისთვის.",
+                btnHC: "უფასო კონსულტაცია", btnHP: "ზაფხულის ფასები 2026!",
+                sTitle: "ჩვენი სერვისები", sDesc: "ჩვენ ვიზრუნებთ ყველა ფორმალობაზე, რომ თქვენ შეძლოთ კონცენტრირება თქვენს მომავალზე.",
+                pBadge: "ზაფხულის აქცია 2026!", pTitle: "ყველაზე დაბალი ტარიფები <br>გარანტირებული",
+                pDesc: "მოემზადეთ 2026 წლის ზაფხულისთვის ჩვენი სარეკლამო ფასებით ძირითად სერვისებზე.",
+                pDisc: "* სხვა სერვისები ფასდება ინდივიდუალურად უფასო ანალიზის შემდეგ.",
+                cH: "დანაზოგების ვიზუალიზაცია (PLN)",
+                conT: "თქვენი ოფისი ლენჩიცაში", labLoc: "მისამართი", labTel: "კონტაქტი",
+                consT: "უფასო კონსულტაცია", consD: "მოგვწერეთ ან დაგვირეკეთ. ჩვენ უფასოდ შევამოწმებთ თქვენი დოკუმენტების მდგომარეობას.",
+                lBtnC: "დაგვირეკეთ", fOff: "ლენჩიცას ოფისი", fLeg: "უცხოელთა მომსახურება",
+                labels: ["ბინადრობის ბარათი", "მართვის მოწმობა", "Profil Zaufany"],
+                datasets: ["სტანდარტული ფასი", "ზაფხული 2026 ☀️"],
+                services: [
+                    { t: "დროებითი ბინადრობა", d: "სრული მხარდაჭერა დროებითი ბინადრობის განაცხადებზე." },
+                    { t: "რეზიდენტის სტატუსი", d: "ევროკავშირის გრძელვადიანი რეზიდენტის სტატუსის მოპოვებაში დახმარება." },
+                    { t: "Profil Zaufany", d: "Profil Zaufany-ს (ePUAP) შექმნა და ონლაინ საქმეების მართვა." },
+                    { t: "მართვის მოწმობა", d: "უცხოური დოკუმენტის პოლონურით შეცვლის სრული მომსახურება." },
+                    { t: "PESEL რეესტრი", d: "PESEL სტატუსის შემოწმება და მონაცემების განახლება." },
+                    { t: "ნასამართლეობა", d: "KRK რეესტრიდან ნასამართლეობის ცნობების მოპოვება." },
+                    { t: "საქმეები ZUS-ში", d: "განაცხადები სოციალურ შეღავათებზე და წარმომადგენლობა." }
+                ],
+                priceItems: [
+                    { n: "ბინადრობის ბარათი", old: "1200 zł", new: "700 zł" },
+                    { n: "მართვის მოწმობა", old: "500 zł", new: "300 zł" },
+                    { n: "Profil Zaufany", old: "100 zł", new: "50 zł" }
+                ]
+            }
+        };
+
+        let currentChart = null;
+
+        function changeLanguage(lang) {
+            const t = translations[lang];
+            
+            // Updating DOM
+            document.getElementById('nav-free-cons').innerText = t.navFree;
+            document.getElementById('hero-office').innerText = t.heroOff;
+            document.getElementById('hero-title').innerHTML = t.heroT;
+            document.getElementById('hero-subtitle').innerText = t.heroS;
+            document.getElementById('btn-hero-contact').innerText = t.btnHC;
+            document.getElementById('btn-hero-promo').innerText = t.btnHP;
+            document.getElementById('section-services-title').innerText = t.sTitle;
+            document.getElementById('section-services-desc').innerText = t.sDesc;
+            document.getElementById('promo-badge').innerText = t.pBadge;
+            document.getElementById('promo-title').innerHTML = t.pTitle;
+            document.getElementById('promo-desc').innerText = t.pDesc;
+            document.getElementById('promo-disclaimer').innerText = t.pDisc;
+            document.getElementById('chart-heading').innerText = t.cH;
+            document.getElementById('contact-title').innerText = t.conT;
+            document.getElementById('label-loc').innerText = t.labLoc;
+            document.getElementById('label-tel').innerText = t.labTel;
+            document.getElementById('cons-title').innerText = t.consT;
+            document.getElementById('cons-desc').innerText = t.consD;
+            document.getElementById('label-btn-call').innerText = t.lBtnC;
+
+            const servicesGrid = document.getElementById('services-container');
+            servicesGrid.innerHTML = t.services
+                .filter(s => !s.showOnly || s.showOnly.includes(lang))
+                .map(s => `
+                    <div class="service-card group">
+                        <h3 class="font-bold text-slate-900 mb-2 text-xl group-hover:text-yellow-600 transition-colors">${s.t}</h3>
+                        <p class="text-slate-500 text-sm leading-relaxed">${s.d}</p>
+                    </div>
+                `).join('');
+
+            const priceList = document.getElementById('price-list');
+            priceList.innerHTML = t.priceItems.map(p => `
+                <div class="flex justify-between items-center bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-yellow-500 transition-colors">
+                    <span class="font-bold text-slate-900 text-lg">${p.n}</span>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-300 line-through mr-3">${p.old}</span>
+                        <span class="text-2xl font-bold text-green-600">${p.new}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            document.querySelectorAll('#lang-switcher button').forEach(b => b.classList.remove('lang-active'));
+            document.getElementById(`btn-${lang}`).classList.add('lang-active');
+
+            updateChart(t, lang);
+        }
+
+        function updateChart(t, lang) {
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            
+            // Adjusted datasets for the new service
+            const standardData = lang === 'pl' || lang === 'ua' ? [1200, 500, 500, 100] : [1200, 500, 100];
+            const promoData = lang === 'pl' || lang === 'ua' ? [700, 350, 300, 50] : [700, 300, 50];
+
+            if (currentChart) {
+                currentChart.data.labels = t.labels;
+                currentChart.data.datasets[0].label = t.datasets[0];
+                currentChart.data.datasets[0].data = standardData;
+                currentChart.data.datasets[1].label = t.datasets[1];
+                currentChart.data.datasets[1].data = promoData;
+                currentChart.update();
+            } else {
+                currentChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: t.labels,
+                        datasets: [
+                            {
+                                label: t.datasets[0],
+                                data: standardData,
+                                backgroundColor: '#e2e8f0',
+                                borderRadius: 8,
+                            },
+                            {
+                                label: t.datasets[1],
+                                data: promoData,
+                                backgroundColor: '#d4af37',
+                                borderRadius: 8,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { font: { family: 'Montserrat', weight: 'bold' } } }
+                        },
+                        scales: {
+                            y: { 
+                                beginAtZero: true, 
+                                ticks: { 
+                                    callback: function(value) { return value + ' PLN'; }
+                                } 
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        window.onload = () => changeLanguage('pl');
+    </script>
+</body>
+</html>
